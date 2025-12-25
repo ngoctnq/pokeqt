@@ -198,7 +198,7 @@ function startListening(numPlayers) {
 
 function startListening(numPlayers) {
     // load a json file on the internet
-    fetch(`/results/${numPlayers}p.json`)
+    fetch(`results/${numPlayers}p.json`)
         .then(response => response.json())
         .then(data => {
             // loop through key-value pairs in data
