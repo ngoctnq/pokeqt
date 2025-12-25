@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ngoc's Poker Equity Calculator</title>
+        <link rel="stylesheet" href="index.css" />
+        <script src="update.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <h1>Ngoc's Poker Equity Calculator</h1>
+            <h3 onclick="toggle_help()" title="Help">?</h3>
+        </header>
+        <div id="content">
+            <div id="controls">
+                <label for="num_players">Number of players:</label>
+                <div class="number-input">
+                    <button
+                        onclick="increment(this);"
+                        class="minus"
+                    ></button>
+                    <!-- <input
+                        min="2"
+                        max="9"
+                        name="num_players"
+                        value="2"
+                        type="number"
+                        id="num-players"
+                    /> -->
+                    <select name="num_players" id="num-players">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                    <button
+                        onclick="increment(this);"
+                        class="plus"
+                    ></button>
+                </div>
+                <!-- <button id="calculate">Calculate</button> -->
+            </div>
+            <div id="heatmap">
+                <table>
+                    <tbody id="table"></tbody>
+                </table>
+                <div id="cmap-legend">
+                    <div id="cmap-legend-bar"></div>
+                    <div id="cmap-legend-labels">
+                        <span id="minval">0.0</span>
+                        <span id="maxval">0.0</span>
+                    </div>
+                </div>
+            </div>
+            <div id="legend">
+                <div class="stat-cell" id="hand-name">
+                    Select a hand
+                </div>
+                <div class="stat-cell">
+                    <div class="stat-legend">Wins:</div>
+                    <span id="wins">-</span>
+                </div>
+                <div class="stat-cell">
+                    <div class="stat-legend">Ties:</div>
+                    <span id="ties">-</span>
+                </div>
+                <div class="stat-cell">
+                    <div class="stat-legend">Losses:</div>
+                    <span id="losses">-</span>
+                </div>
+                <div class="stat-cell">
+                    <div class="stat-legend">Equity:</div>
+                    <span id="equity">-</span>
+                </div>
+            </div>
+        </div>
+        <div id="help" is_hidden="true">
+            <h2>What is this?</h2>
+            <p>
+                This is a simple poker hand equity calculator that uses Monte Carlo simulations to estimate
+                the winning probabilities and equity of different starting hands in Texas Hold'em poker.
+            </p>
+            <h2>How to use?</h2>
+            <p>
+                These numbers are dependent on the number of players at the table. To use this tool:
+            </p>
+            <ol>
+                <li>Set the number of players (2-9) using the input box or +/- buttons.</li>
+                <li>Click "Calculate" to generate the equity heatmap.</li>
+                <li>Hover over a hand in the heatmap to see detailed statistics.</li>
+            </ol>
+            <p>
+                The heatmap colors indicate hand strength, where darker represensents weaker hands (i.e. lower equity).<br />
+                Each cell is divided into three sections showing the probabilities of winning, tying, and losing with that hand.
+            </p>
+            <h2>What's going on?</h2>
+            <p>
+                Originally this tool is designed to monitor the estimates in real-time: when running on a 192-core AWS instance,
+                looking at the flashing cells is mesmerizing (just like Vegas). Now that AWS did not apply this credit and instead
+                sent me to debt collection, the results shown here are statically served from the cached results.
+            </p>
+            <p>
+                I also wrote a 3-part write-up on the process of making this, you should
+                <a href="https://blog.ngoc.io/posts/monte-carlo">check</a>.
+                <a href="https://blog.ngoc.io/posts/control-variate">them</a>.
+                <a href="https://blog.ngoc.io/posts/stacking-chips">out</a>.
+            </p>
+            <h2>Other tips</h2>
+            <ol>
+                <li>Click on a cell to pin its statistics so that you don't have to hover; or if you're on mobile.</li>
+                <li>Hover over the color map bar to see the breakdowns without any cell selected.</li>
+                <li>Click anywhere outside of the table to unpin the statistics.</li>
+            </ol>
+            <h2>Credits</h2>
+            <p>
+                You can reach out to me <a href="mailto:hi@ngoc.io">here</a>, or go to my <a href="https://ngoc.io">homepage</a>.<br />
+            </p>
+        </div>
+        <div id="close-btn" onclick="toggle_help()" title="Close help">&times;</div>
+    </body>
+</html>

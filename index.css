@@ -1,0 +1,346 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #141414;
+    color: #eaeaea;
+    overflow: hidden;
+    position: relative;
+}
+
+header {
+    height: 10%;
+    text-align: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 10px;
+}
+
+h1 {
+    margin: 0;
+}
+
+h3 {
+    color: #ff6b6b;
+    transition: color 0.1s ease, text-shadow 0.1s ease, transform 0.2s;
+}
+
+h3:hover {
+    cursor: pointer;
+    color:#ffaeae;
+    text-shadow: 0 0 10px #eaeaea, 0 0 20px #eaeaea, 0 0 30px #eaeaea;
+    transform: translate(0px, 2px);
+}
+
+#help {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    padding: 15%;
+    backdrop-filter: brightness(50%) blur(20px);
+    width: 70%;
+    height: 100%;
+    transition: transform 0.2s ease;
+    overflow-y: scroll;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#help[is_hidden="true"] {
+    transform: translate(0, 100%);
+}
+
+#help > p > a {
+    text-decoration: none;
+    color: #ff6b6b;
+}
+
+#help > h2 {
+    margin-top: 1em;
+}
+
+#help > p > a:hover {
+    text-decoration: underline;
+}
+
+#help > p:last-child {
+    padding-bottom: 50%;
+}
+
+#close-btn {
+    position: fixed;
+    top: 60px;
+    right: calc(2% + 60px);
+    font-size: 48px;
+    color: #eaeaea80;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#help[is_hidden="true"] + #close-btn {
+    transform: translate(0, -120px);
+}
+
+#close-btn:hover {
+    color: #eaeaea;
+}
+
+#content {
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+#controls {
+    margin: 15px;
+    display: flex;
+    align-items: center;
+}
+
+button {
+    font-size: 14px;
+    padding: 6px 12px;
+    margin: 0 10px;
+    /* margin-bottom: 2px; */
+    background-color: #1e1e1e;
+    color: #eaeaea;
+    border: 1px solid #eaeaea80;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0a7b5b;
+    border-color: #0a7b5b;
+}
+
+input[type="number"] {
+    appearance: textfield;
+}
+
+.number-input {
+    border: 1px solid #eaeaea80;
+    display: inline-flex;
+    margin: 0 20px;
+    border-radius: 4px;
+}
+
+.number-input,
+.number-input * {
+    box-sizing: border-box;
+}
+
+.number-input button {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 20px;
+    cursor: pointer;
+    margin: 0;
+    position: relative;
+}
+
+.number-input button:after {
+    display: inline-block;
+    position: absolute;
+    font-weight: 600;
+    color: #eaeaea;
+    font-family: monospace;
+    content: "-";
+    transform: translate(-50%, -50%);
+}
+.number-input button.plus:after {
+    content: "+";
+    transform: translate(-50%, -50%);
+}
+
+.number-input button:hover {
+    background-color: #2e2e2e;
+}
+
+.number-input input[type="number"] {
+    border: solid #eaeaea;
+    border-width: 0 2px;
+    font-size: 16px;
+    text-align: center;
+}
+
+#heatmap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-height: 100%;
+}
+
+table {
+    display: inline-flex;
+    max-width: 100%;
+}
+
+tbody {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: #1e1e1e;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    /* overflow: hidden; */
+}
+
+#heatmap:hover .draw-overlay {
+    opacity: 0.2;
+}
+
+tbody:hover td:not(:hover) {
+    opacity: 0.2;
+}
+
+tr {
+    display: flex;
+}
+
+td {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    aspect-ratio: 1 / 1;
+    width: min(calc(80vw / 13), calc((72vh - 100px) / 13));
+    /* min-width: 45px; */
+    max-width: 72px;
+    transition: background-color 0.2s ease, opacity 0.1s ease;
+    position: relative;
+    opacity: 1;
+}
+
+.draw-overlay {
+    position: absolute;
+    top: 0;
+    left: 0%;
+    width: 0%;
+    height: 100%;
+    background-color: #fff;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.1s ease, background-color 0.1s ease;
+}
+
+.selected {
+    box-shadow: inset 0px 0px 0px 3px #0cdca1;
+}
+
+.hand-name {
+    font-weight: bold;
+    margin: 10%;
+    font-size: 14px;
+    transition: opacity 0.1s ease;
+    opacity: 1;
+}
+
+.hand-value {
+    text-align: right;
+    margin: 10%;
+    font-size: 12px;
+    transition: color 0.2s ease, opacity 0.1s ease;
+    opacity: 1;
+}
+
+#cmap-legend {
+    display: flex;
+    margin-top: 12px;
+    margin-left: 3px;
+    margin-right: 3px;
+    flex-direction: column;
+    width: 100%;
+}
+
+#cmap-legend-bar {
+    height: 10px;
+    border: white solid 0px;
+    border-radius: 6px;
+    background: linear-gradient(
+        to right,
+        #0e0e0e,
+        /* Black */ #3b0f6f,
+        /* Dark Purple */ #8c2981,
+        /* Magenta */ #de4968,
+        /* Orange-Red */ #fe9f6d,
+        /* Yellow-Orange */ #fcfdbf /* Near White */
+    );
+    width: 100%;
+}
+
+#cmap-legend-labels {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+#legend {
+    position: absolute;
+    width: 80%;
+    bottom: 0;
+    padding: 3px 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1e1e1e;
+    height: 36px;
+}
+
+.stat-cell {
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+    font-size: 16px;
+    border-left: 1px solid #eaeaea10;
+}
+
+#hand-name {
+    font-weight: bold;
+    border: none;
+    justify-content: center;
+}
+
+.stat-legend {
+    width: 50%;
+    text-align: right;
+    color: #c6c6c6;
+}
+
+.stat-cell > span {
+    font-weight: bold;
+    text-align: left;
+    width: 50%;
+    margin-left: 5px;
+}
+
+#wins {
+    color:#0cdca1;
+}
+
+#ties {
+    color:#888888;
+}
+
+#losses {
+    color:#ff6b6b;
+}
+
+#equity {
+    color:#ffffff;
+}
