@@ -10,7 +10,6 @@
     <body>
         <header>
             <h1>Ngoc's Poker Equity Calculator</h1>
-            <h3 onclick="toggle_help()" title="Help">?</h3>
         </header>
         <div id="content">
             <div id="controls">
@@ -20,14 +19,6 @@
                         onclick="increment(this);"
                         class="minus"
                     ></button>
-                    <!-- <input
-                        min="2"
-                        max="9"
-                        name="num_players"
-                        value="2"
-                        type="number"
-                        id="num-players"
-                    /> -->
                     <select name="num_players" id="num-players">
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -44,6 +35,7 @@
                     ></button>
                 </div>
                 <!-- <button id="calculate">Calculate</button> -->
+                <h3 onclick="toggle_help()" title="Help">?</h3>
             </div>
             <div id="heatmap">
                 <table>

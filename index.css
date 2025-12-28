@@ -27,6 +27,7 @@ h1 {
 
 h3 {
     color: #ff6b6b;
+    font-size: 18px;
     transition: color 0.1s ease, text-shadow 0.1s ease, transform 0.2s;
 }
 
@@ -34,7 +35,7 @@ h3:hover {
     cursor: pointer;
     color:#ffaeae;
     text-shadow: 0 0 10px #eaeaea, 0 0 20px #eaeaea, 0 0 30px #eaeaea;
-    transform: translate(0px, 2px);
+    transform: translate(0px, -1.5px);
 }
 
 #help {
@@ -180,12 +181,21 @@ input[type="number"] {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-height: 100%;
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    padding-bottom: 5px;
 }
 
 table {
-    display: inline-flex;
-    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    max-width: min(65vh, 95%); 
+    height: auto;
+    margin: 0 auto;
 }
 
 tbody {
@@ -195,10 +205,11 @@ tbody {
     background-color: #1e1e1e;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     flex: 1;
-    /* overflow: hidden; */
+    width: 100%;
+    container-type: size;
 }
 
-#heatmap:hover .draw-overlay {
+#heatmap:has(:hover) .draw-overlay {
     opacity: 0.2;
 }
 
@@ -208,6 +219,8 @@ tbody:hover td:not(:hover) {
 
 tr {
     display: flex;
+    flex: 1;
+    width: 100%;
 }
 
 td {
@@ -216,9 +229,6 @@ td {
     flex-direction: column;
     justify-content: space-between;
     aspect-ratio: 1 / 1;
-    width: min(calc(80vw / 13), calc((72vh - 100px) / 13));
-    /* min-width: 45px; */
-    max-width: 72px;
     transition: background-color 0.2s ease, opacity 0.1s ease;
     position: relative;
     opacity: 1;
@@ -243,15 +253,18 @@ td {
 .hand-name {
     font-weight: bold;
     margin: 10%;
-    font-size: 14px;
+    font-size: min(2.5cqw, 14px);
+    line-height: 1;
     transition: opacity 0.1s ease;
     opacity: 1;
+    text-align: left;
 }
 
 .hand-value {
     text-align: right;
     margin: 10%;
-    font-size: 12px;
+    font-size: min(2cqw, 12px);
+    line-height: 1;
     transition: color 0.2s ease, opacity 0.1s ease;
     opacity: 1;
 }
@@ -263,20 +276,21 @@ td {
     margin-right: 3px;
     flex-direction: column;
     width: 100%;
+    max-width: min(65vh, 95%); 
 }
 
 #cmap-legend-bar {
-    height: 10px;
+    height: min(10px, 1cqw);
     border: white solid 0px;
-    border-radius: 6px;
+    border-radius: min(5px, 0.5cqw);
     background: linear-gradient(
         to right,
         #0e0e0e,
-        /* Black */ #3b0f6f,
-        /* Dark Purple */ #8c2981,
-        /* Magenta */ #de4968,
-        /* Orange-Red */ #fe9f6d,
-        /* Yellow-Orange */ #fcfdbf /* Near White */
+        #3b0f6f,
+        #8c2981,
+        #de4968,
+        #fe9f6d,
+        #fcfdbf
     );
     width: 100%;
 }
@@ -286,7 +300,7 @@ td {
     flex-direction: row;
     justify-content: space-between;
     margin-top: 5px;
-    font-size: 12px;
+    font-size: min(2cqw, 12px);
 }
 
 #legend {
@@ -306,7 +320,7 @@ td {
     display: flex;
     flex-direction: row;
     margin-top: 5px;
-    font-size: 16px;
+    font-size: min(16px, 2cqw);
     border-left: 1px solid #eaeaea10;
 }
 
@@ -343,4 +357,12 @@ td {
 
 #equity {
     color:#ffffff;
+}
+
+@media (max-width: 720px) {
+    #legend {
+        width: 100%;
+        padding: 3px 0px;
+        height: 4cqw;
+    }
 }
